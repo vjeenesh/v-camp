@@ -63,6 +63,9 @@ module.exports.showCampground = async (req, res) => {
   ]);
 
   dataString = python.stdout.toString();
+  console.log(dataString)
+  err = python.stderr.toString()
+  console.log(err)
   dataJson = JSON.parse(dataString);
   const recommendations = await Campground.find({
     title: { $in: dataJson["heading"] },

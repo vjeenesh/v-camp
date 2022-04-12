@@ -1,2 +1,4 @@
 node_modules
 .env
+seeds/.env
+controllers/v-camp_recommendation/.ipynb_checkpoints

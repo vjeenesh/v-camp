@@ -67,7 +67,24 @@
   </div>
 
   <div class="col-md-6">
-    <div id="map"></div>
+    <div class="mb-3" id="map"></div>
+    <h2 class="m-2">Similar places to visit..</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <% for(let recommendation of recommendations) { %>
+      <div class="col">
+        <a href="/campgrounds/<%=recommendation._id%>" class="card">
+          <img
+            src="<%=recommendation.images[0].url%>"
+            class="card-img-top"
+            alt="<%=recommendation.title%>"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%=recommendation.title%></h5>
+          </div>
+        </a>
+      </div>
+      <% } %>
+    </div>
     <% if(currentUser) { %>
     <h2>Leave a review</h2>
     <form

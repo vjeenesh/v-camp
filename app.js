@@ -91,6 +91,7 @@ app.use(
         "data:",
         "https://res.cloudinary.com/dj1psudpz/",
         "https://images.unsplash.com/",
+        "https://www.holidify.com/images/",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
     },

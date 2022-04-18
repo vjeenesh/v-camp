@@ -58,7 +58,7 @@ module.exports.showCampground = async (req, res) => {
 
   const recs_title = [];
   const python = spawnSync("python", [
-    path.join(__dirname, "v-camp_recommendation\\Recommender.py"),
+    path.join(__dirname, "v-camp_recommendation/Recommender.py"),
     JSON.stringify(campground),
   ]);
 
@@ -70,8 +70,9 @@ module.exports.showCampground = async (req, res) => {
   const recommendations = await Campground.find({
     title: { $in: dataJson["heading"] },
   });
-  // console.log(`recs title: ${dataJson['heading']}`)
-  // console.log('recs: ',recommendations)
+  console.log(`recs title: ${dataJson['heading']}`)
+  console.log('recs: ',recommendations)
+  
 
   res.render("campgrounds/show", { campground, recommendations });
 };

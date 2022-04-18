@@ -9,7 +9,7 @@ import os
 import json
 
 path = os.getcwd()
-data = pd.read_csv(path+'\\controllers\\v-camp_recommendation\\cleaned_data.csv', index_col=0)
+data = pd.read_csv(path+'/controllers/v-camp_recommendation/cleaned_data.csv', index_col=0)
 
 def recommend_k_places(place, k=5):
     heading = place['title']

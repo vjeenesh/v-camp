@@ -11,7 +11,7 @@ You can view the project here -> [V camp](https://vcamp.herokuapp.com/)
 * Scroll down to **Similar places to visit..** section
 
 ## Data Collection
-The data was scraped from a travel website using *BeatifulSoup* and *requests* library. The data attributes include *name of place, textual description, location, rating, and image url*. The data was converted into a *pandas dataframe* was convenient handling of data.
+The data was scraped from a travel website using *BeatifulSoup* and *requests* library. The data attributes include *name of place, textual description, location, rating, and image url*. The data was converted into a *pandas dataframe* for convenient handling of data.
 
 ## Recommender System
 * The recommender system takes in a campground and filters other campgrounds by same location.

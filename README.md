@@ -5,7 +5,7 @@ V-camp uses a Machine learning model which recommends camps based on the locatio
 
 It uses concepts such as **TF-IDF Vectorization, Tokenization, Cosine similarity** to convert textual data into machine readable format and train a machine learning model off of it.
 
-You can view the project here -> [V camp](https://vcamp.herokuapp.com/)
+You can view the project here -> [V camp](https://v-camp.onrender.com)
 * Click on **View Campgrounds** button
 * Click on **view** button for any campground (alternately you can locate campgrounds on the **map**)
 * Scroll down to **Similar places to visit..** section

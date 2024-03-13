@@ -1,4 +1,4 @@
-const apiURL = "http://localhost:3000/campgrounds?page=all";
+const apiURL = "https://v-camp.onrender.com/campgrounds?page=all";
 let campgrounds;
 let allCampgrounds;
 

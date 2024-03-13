@@ -82,7 +82,7 @@ module.exports.newCampground = async (req, res, next) => {
     filename: f.filename,
   }));
   await campground.save();
-  console.log(campground);
+  // console.log(campground);
   req.flash("success", "Campground Added Successfully");
   res.redirect(`/campgrounds/${campground._id}`);
 };
@@ -111,15 +111,15 @@ module.exports.showCampground = async (req, res) => {
   ]);
 
   dataString = python.stdout.toString();
-  console.log(dataString);
+  // console.log(dataString)
   err = python.stderr.toString();
   console.log(err);
   dataJson = JSON.parse(dataString);
   const recommendations = await Campground.find({
     title: { $in: dataJson["heading"] },
   });
-  console.log(`recs title: ${dataJson["heading"]}`);
-  console.log("recs: ", recommendations);
+  // console.log(`recs title: ${dataJson['heading']}`)
+  // console.log('recs: ',recommendations)
 
   res.render("campgrounds/show", { campground, recommendations });
 };

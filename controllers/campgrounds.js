@@ -8,9 +8,57 @@ const mbxToken = process.env.MAPBOX_TOKEN;
 
 const geocoder = mbxGeocode({ accessToken: mbxToken });
 
+const PRODUCTS_PER_PAGE = 10;
+
 module.exports.index = async (req, res) => {
-  const campgrounds = await Campground.find({});
-  res.render("campgrounds/index", { campgrounds });
+  if (req.query.page === "all") {
+    const campgrounds = await Campground.find({});
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+
+    return res.status(200).json(campgrounds);
+  }
+  let current_page = req.query.page
+    ? +req.query.page <= 0
+      ? 1
+      : +req.query.page
+    : 1;
+  let totalProducts, last_page, last_link, first_link;
+
+  Campground.countDocuments()
+    .then((count) => {
+      totalProducts = count;
+      last_page = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+      current_page = current_page > last_page ? last_page : current_page;
+      first_link =
+        current_page - 2 <= 1
+          ? 1
+          : last_page - 4 < current_page - 2
+          ? last_page - 4
+          : current_page - 2;
+      last_link =
+        current_page + 2 > last_page
+          ? last_page
+          : first_link + 4 > last_page
+          ? current_page + 2
+          : first_link + 4;
+      return Campground.find()
+        .skip((current_page - 1) * PRODUCTS_PER_PAGE)
+        .limit(PRODUCTS_PER_PAGE);
+    })
+    .then((campgrounds) => {
+      res.render("campgrounds/index", {
+        campgrounds: campgrounds,
+        pagination: {
+          first: first_link,
+          last: last_link,
+          current: current_page,
+        },
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -63,16 +111,15 @@ module.exports.showCampground = async (req, res) => {
   ]);
 
   dataString = python.stdout.toString();
-  console.log(dataString)
-  err = python.stderr.toString()
-  console.log(err)
+  console.log(dataString);
+  err = python.stderr.toString();
+  console.log(err);
   dataJson = JSON.parse(dataString);
   const recommendations = await Campground.find({
     title: { $in: dataJson["heading"] },
   });
-  console.log(`recs title: ${dataJson['heading']}`)
-  console.log('recs: ',recommendations)
-  
+  console.log(`recs title: ${dataJson["heading"]}`);
+  console.log("recs: ", recommendations);
 
   res.render("campgrounds/show", { campground, recommendations });
 };

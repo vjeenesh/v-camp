@@ -1,0 +1,28 @@
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a
+        class="page-link <% if(pagination.current==1) { %>disabled<% } %>"
+        href="?page=<%= pagination.current-1 %>"
+        >Previous</a
+      >
+    </li>
+    <% for(let pageNum=pagination.first; pageNum<= pagination.last; pageNum++) {
+    %>
+    <li class="page-item">
+      <a
+        class="page-link <% if(pagination.current==pageNum) { %>active<% } %>"
+        href="?page=<%=pageNum%>"
+        ><%= pageNum %></a
+      >
+    </li>
+    <% } %>
+    <li class="page-item">
+      <a
+        class="page-link <% if(pagination.current==pagination.last) { %>disabled<% } %>"
+        href="?page=<%= pagination.current+1 %>"
+        >Next</a
+      >
+    </li>
+  </ul>
+</nav>
